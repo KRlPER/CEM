@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Image, ImageBackground } from 'react-native';
-import logoImage from './assets/SHAIDSLOGO.png'; // Adjust the path as necessary
+import { auth, db } from './firebaseConfig'; // Import Firebase Auth & Firestore
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import logoImage from './assets/SHAIDSLOGO.png';
 import backgroundImage from './assets/background.png';
 
 const LeadsLoginScreen = ({ navigation }) => {
@@ -8,14 +11,43 @@ const LeadsLoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    if (leadId && password) {
-      Alert.alert('Login Successful', `Welcome, Lead ID: ${leadId}`);
-      navigation.navigate('LeadsHome'); // Navigate to LeadsHome after successful login
-    } else {
+
+
+  const handleLogin = async () => {
+    if (!leadId || !password) {
       Alert.alert('Error', 'Please enter both Lead ID and Password');
+      return;
+    }
+  
+    try {
+      // Firestore Path: leads/{leadId}/profile/details
+      const detailsRef = doc(db, 'leads', leadId, 'profile', 'details');
+      const detailsSnap = await getDoc(detailsRef);
+  
+      if (!detailsSnap.exists()) {
+        Alert.alert('Error', 'Lead ID not found.');
+        return;
+      }
+  
+      // Retrieve stored data
+      const leadData = detailsSnap.data();
+      console.log('Retrieved Data:', leadData);
+  
+      // Check if entered password matches stored password
+      if (leadData.password !== password) {
+        Alert.alert('Error', 'Invalid Password.');
+        return;
+      }
+  
+      Alert.alert('Login Successful', `Welcome, ${leadData.name || leadId}`);
+      navigation.navigate('LeadsHome'); // Navigate to LeadsHome after login
+  
+    } catch (error) {
+      console.error('Login Error:', error);
+      Alert.alert('Login Failed', 'Something went wrong. Please try again.');
     }
   };
+  
 
   const handleSignupPress = () => {
     navigation.navigate('LeadsSignup'); // Navigate to LeadsSignup screen
@@ -73,7 +105,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255)', // Optional: Add some transparency for better readability
     padding: 20,
   },
   logo: {

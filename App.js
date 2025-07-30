@@ -8,10 +8,14 @@ import SignupScreen from './SignupScreen';
 import LeadsLoginScreen from './LeadsLoginScreen';
 import LeadsSignupScreen from './LeadsSignupScreen';
 import ProfileScreen from './ProfileScreen';
-import { CustomDrawerContent } from './CustomDrawerContent';
+// import { CustomDrawerContent } from './CustomDrawerContent';
 import CreateProfile from './CreateProfile';
 import LeadsHome from './LeadsHome';
 import LeadsHomeDrawer from './LeadsHomeDrawer';
+import ProfileDetailsScreen from './ProfileDetailsScreen';
+
+import CreateEventScreen from './CreateEventScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,19 +53,21 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileDrawer() {
-  return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Signup" component={SignupScreen} />
-      <Drawer.Screen name="Leads" component={LeadsLoginScreen} />
-      <Drawer.Screen name="LeadsSignup" component={LeadsSignupScreen} />
-      <Drawer.Screen name="CreateProfile" component={CreateProfile} />
-      <Drawer.Screen name="LeadsHome" component={LeadsHome} />
-    </Drawer.Navigator>
-  );
-}
+
+
+// function ProfileDrawer() {
+//   return (
+//     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+//       <Drawer.Screen name="Profile" component={ProfileScreen} />
+//       <Drawer.Screen name="Home" component={HomeScreen} />
+//       <Drawer.Screen name="Signup" component={SignupScreen} />
+//       <Drawer.Screen name="Leads" component={LeadsLoginScreen} />
+//       <Drawer.Screen name="LeadsSignup" component={LeadsSignupScreen} />
+//       <Drawer.Screen name="CreateProfile" component={CreateProfile} />
+//       <Drawer.Screen name="LeadsHome" component={LeadsHome} />
+//     </Drawer.Navigator>
+//   );
+// }
 
 function App() {
   return (
@@ -72,10 +78,19 @@ function App() {
         <Stack.Screen name="Leads" component={LeadsLoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="LeadsSignup" component={LeadsSignupScreen} options={{ headerShown: false }} />
         <Stack.Screen name="LeadsHomeDrawer" component={LeadsHomeDrawer} options={{ headerShown: false }} />
-        <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} options={{ headerShown: false }} /> */}
         <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="CreateProfile" component={CreateProfile} options={{ headerShown: false }}/>
         <Stack.Screen name="LeadsHome" component={LeadsHome} options={{ headerShown: false }} />
+        <Stack.Screen 
+          name="ProfileScreen" 
+          component={ProfileScreen} 
+          options={{ headerShown: false }} // 🔥 Hide header for Profile screen
+        />
+        <Stack.Screen name="ProfileDetails" component={ProfileDetailsScreen} options={{ headerShown: false }} />
+  
+
+        <Stack.Screen name="CreateEventScreen" component={CreateEventScreen} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

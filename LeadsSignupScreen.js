@@ -1,28 +1,58 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Image, ImageBackground } from 'react-native';
+import { 
+  StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Image, ImageBackground 
+} from 'react-native';
+import { auth, db } from './firebaseConfig'; // Import Firestore
+import { doc, setDoc } from 'firebase/firestore';
+
 import logoImage from './assets/SHAIDSLOGO.png';
-import backgroundImage from './assets/background.png'; // Ensure this is the same background as StudentScreen
+import backgroundImage from './assets/background.png';
 
 const LeadsSignupScreen = ({ navigation }) => {
   const [leadId, setLeadId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSignup = () => {
-    if (leadId && password && password === confirmPassword) {
-      Alert.alert('Signup Successful', `Welcome, Lead ID: ${leadId}`);
-      navigation.navigate('Leads'); // Navigate back to Leads login screen after signup
-    } else {
-      Alert.alert('Error', 'Please check your inputs. Make sure passwords match and all fields are filled.');
+  const handleSignup = async () => {
+    if (!studentId || !password || password !== confirmPassword) {
+      Alert.alert('Error', 'Make sure all fields are filled and passwords match.');
+      return;
+    }
+  
+    try {
+      // Create user in Firebase Authentication
+      const email = `${studentId}@student.com`; // Convert student ID to email format
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      console.log("User signed up:", user.uid);
+  
+      // Check if user is authenticated
+      if (!user || !user.uid) {
+        throw new Error("User not authenticated.");
+      }
+  
+      // Save student profile in Firestore
+      await setDoc(doc(db, "students", user.uid), {
+        studentId: studentId,
+        email: user.email,
+        createdAt: new Date(),
+      });
+  
+      Alert.alert('Signup Successful', `Welcome, Student ID: ${studentId}`, [
+        { text: "OK", onPress: () => navigation.navigate('Student') }
+      ]);
+  
+    } catch (error) {
+      console.error("Signup Error:", error.message);
+      Alert.alert('Signup Failed', error.message);
     }
   };
-
   return (
     <ImageBackground source={backgroundImage} style={styles.background}>
       <ScrollView contentContainerStyle={styles.container}>
         <Image source={logoImage} style={styles.logo} resizeMode="contain" />
-        <Text style={styles.title}>         Sign Up         </Text>
+        <Text style={styles.title}>Sign Up</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -37,7 +67,7 @@ const LeadsSignupScreen = ({ navigation }) => {
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
-            secureTextEntry={!showPassword}
+            secureTextEntry
             placeholderTextColor="#aaa"
           />
           <TextInput
@@ -45,7 +75,7 @@ const LeadsSignupScreen = ({ navigation }) => {
             placeholder="Confirm Password"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
-            secureTextEntry={!showPassword}
+            secureTextEntry
             placeholderTextColor="#aaa"
           />
         </View>
@@ -70,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    opacity: 0.9, // Slight transparency for better background blending
+    opacity: 0.9,
   },
   logo: {
     width: 120,
@@ -85,11 +115,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   inputContainer: {
-    width: '115%', // Set a fixed width for consistency with StudentScreen
+    width: '115%',
     marginBottom: 20,
   },
   input: {
-    width: '100%', // Ensure input takes full width of container
+    width: '100%',
     padding: 15,
     borderWidth: 1,
     borderColor: '#00BFFF',
@@ -99,14 +129,14 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   passwordInput: {
-    width: '100%', // Ensure password input takes full width of container
+    width: '100%',
     padding: 15,
     borderWidth: 1,
     borderColor: '#00BFFF',
     borderRadius: 10,
     backgroundColor: '#fff',
     elevation: 1,
-    marginBottom: 15, // Added margin for spacing
+    marginBottom: 15,
   },
   button: {
     backgroundColor: '#00BFFF',
