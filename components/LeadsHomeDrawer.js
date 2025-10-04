@@ -1,9 +1,9 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import LeadsHome from './LeadsHome';
-import ProfileScreen from './ProfileScreen';
-import SignupScreen from './SignupScreen';
-import CustomDrawerContent from './CustomDrawerContent'; // Ensure this is imported correctly
+import LeadsHome from '../pages/LeadsHome';
+import ProfileScreen from '../pages/ProfileScreen';
+import SignupScreen from '../pages/SignupScreen';
+import CustomDrawerContent from '../components/CustomDrawerContent'; // Ensure this is imported correctly
 
 const Drawer = createDrawerNavigator();
 

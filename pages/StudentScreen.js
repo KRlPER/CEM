@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Image, ImageBackground } from 'react-native';
-import { auth, db, signInWithEmailAndPassword, doc, getDoc } from './firebaseConfig'; // Import Firebase functions
-import logoImage from './assets/SHAIDSLOGO.png';
-import backgroundImage from './assets/background.png';
+import { auth, db, signInWithEmailAndPassword, doc, getDoc } from '../firebaseConfig'; // Import Firebase functions
+import logoImage from '../assets/CSILOGO.png';
+import backgroundImage from '../assets/background.png';
 
 const StudentScreen = ({ navigation }) => {
   const [studentId, setStudentId] = useState('');

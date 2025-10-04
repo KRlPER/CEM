@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Button, TextInput, Alert, StyleSheet } from 'react-native';
-import { db } from './firebaseConfig';
+import { db } from '../firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 
 const CreateEventScreen = ({ navigation }) => {

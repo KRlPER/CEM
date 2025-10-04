@@ -3,7 +3,7 @@ import {
   StyleSheet,TouchableWithoutFeedback, Text, View, TouchableOpacity, Alert, ActivityIndicator, Animated, Dimensions, TextInput, Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { auth, db } from './firebaseConfig';
+import { auth, db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import { LinearGradient } from 'expo-linear-gradient';
 // import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
@@ -101,7 +101,7 @@ useEffect(() => {
         {/* Header Section */}
         <View style={styles.header}>
           {/* SHAIDS Logo */}
-          <Image source={require('./assets/SHAIDSLOGO.png')} style={styles.logo} />
+          <Image source={require('../assets/CSILOGO.png')} style={styles.logo} />
 
           {/* Greeting */}
           <Text style={styles.greeting}>Hi, {firstName}</Text>

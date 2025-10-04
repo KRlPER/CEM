@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, Text, StyleSheet, Alert, FlatList } from 'react-native';
-import { db } from './firebaseConfig';
+import { db } from '../firebaseConfig';
 import { doc, getDoc, collection, addDoc } from 'firebase/firestore';
 
 const EventDetailsScreen = ({ route, navigation }) => {

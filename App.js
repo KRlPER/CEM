@@ -3,25 +3,25 @@ import { StyleSheet, ImageBackground, Image, View, TouchableOpacity, Text } from
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import StudentScreen from './StudentScreen';
-import SignupScreen from './SignupScreen';
-import LeadsLoginScreen from './LeadsLoginScreen';
-import LeadsSignupScreen from './LeadsSignupScreen';
-import ProfileScreen from './ProfileScreen';
+import StudentScreen from './pages/StudentScreen';
+import SignupScreen from './pages/SignupScreen';
+import LeadsLoginScreen from './pages/LeadsLoginScreen';
+import LeadsSignupScreen from './pages/LeadsSignupScreen';
+import ProfileScreen from './pages/ProfileScreen';
 // import { CustomDrawerContent } from './CustomDrawerContent';
-import CreateProfile from './CreateProfile';
-import LeadsHome from './LeadsHome';
-import LeadsHomeDrawer from './LeadsHomeDrawer';
-import ProfileDetailsScreen from './ProfileDetailsScreen';
+import CreateProfile from './pages/CreateProfile';
+import LeadsHome from './pages/LeadsHome';
+import LeadsHomeDrawer from './components/LeadsHomeDrawer';
+import ProfileDetailsScreen from './pages/ProfileDetailsScreen';
 
-import CreateEventScreen from './CreateEventScreen';
+import CreateEventScreen from './pages/CreateEventScreen';
 
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const backgroundImage = require('./assets/background.png');
-const logoImage = require('./assets/SHAIDSLOGO.png');
+const logoImage = require('./assets/CSILOGO.png');
 const studentImage = require('./assets/student.png');
 const leadsImage = require('./assets/leads.png');
 
