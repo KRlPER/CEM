@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { Checkbox } from 'react-native-paper';  
 import { Picker } from '@react-native-picker/picker';  
-import { auth, db } from './firebaseConfig';
+import { auth, db } from '../firebaseConfig';
 import { doc, setDoc } from "firebase/firestore";
 
 // 🔥 Skill Categories

@@ -3,7 +3,7 @@ import {
   StyleSheet, TouchableWithoutFeedback, Text, View, TouchableOpacity, Alert, ActivityIndicator, Animated, Dimensions, TextInput, Image, FlatList, BackHandler
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { db } from './firebaseConfig';
+import { db } from '../firebaseConfig';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { LinearGradient } from 'expo-linear-gradient';
 // import { ScrollView } from 'react-native';
@@ -129,7 +129,7 @@ const LeadsHomeScreen = ({ navigation }) => {
         <View style={styles.container}>
           {!isSearching && (
             <View style={styles.header}>
-              <Image source={require('./assets/SHAIDSLOGO.png')} style={styles.logo} />
+              <Image source={require('../assets/CSILOGO.png')} style={styles.logo} />
               <Text style={styles.greeting}>Hi, Lead</Text>
               <TouchableOpacity style={styles.profileAvatar}>
                 <Icon name="user-circle" size={40} color="#00BFFF" />

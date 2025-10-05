@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, TextInput, FlatList, Text, StyleSheet } from 'react-native';
-import { db } from './firebaseConfig';
+import { db } from '../firebaseConfig';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 
 const AddStudentsToTeamScreen = ({ route }) => {

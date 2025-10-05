@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { 
   StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Image, ImageBackground 
 } from 'react-native';
-import { auth, db } from './firebaseConfig'; // Import Firestore
+import { auth, db } from '../firebaseConfig'; // Import Firestore
 import { doc, setDoc } from 'firebase/firestore';
 
-import logoImage from './assets/SHAIDSLOGO.png';
-import backgroundImage from './assets/background.png';
+import logoImage from '../assets/CSILOGO.png';
+import backgroundImage from '../assets/background.png';
 
 const LeadsSignupScreen = ({ navigation }) => {
   const [leadId, setLeadId] = useState('');
